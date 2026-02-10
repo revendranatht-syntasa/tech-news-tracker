@@ -41,7 +41,7 @@ class FeedProcessor:
     def safe_filename(text: str) -> str:
         """Create safe filename from text"""
         return re.sub(r"[^\w\-]", "_", text)
-    
+
     @staticmethod
     def parse_date(entry) -> str:
         """Parse date from feed entry"""
@@ -368,7 +368,7 @@ class NewsPipeline:
         self._ingest_feeds()
 
         for feed_name in self.config.feeds.rss_feeds.keys():
-            print(f"\n🔍 Searching in feed '{feed_name}' for query: '{query}'")
+            print(f"\nSearching in feed '{feed_name}' for query: '{query}'")
             results = self.vector_dbs[feed_name].search_with_threshold(query, k=5, threshold=1.4)
 
             # TODO: Store this result in a txt file(corresponding to the feed_name here) for later use instead of printing
@@ -386,9 +386,17 @@ class NewsPipeline:
 
             docs = FeedProcessor.fetch_rss_articles(feed_name, url)
 
+            ## TODO:: REMOVE after testing
+            count = 0
+            max=5
+
             for doc in docs:
                 url = doc.metadata.get("link")
                 self._process_url(feed_name, url)
+
+                count += 1
+                if count >= max:
+                    break
 
     def _process_url(self, feed_name: str, url: str):
             data = DataUtils.fetch_and_parse(url)
