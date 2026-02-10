@@ -1,3 +1,20 @@
-feedparser
+# Core dependencies
+langchain-community
+langchain-core
+langchain-huggingface
+langchain-chroma
+
+# Web scraping
+playwright
 beautifulsoup4
 lxml
+feedparser
+
+# Vector embeddings
+sentence-transformers
+
+# LLM client
+openai
+
+# Environment management
+python-dotenv
