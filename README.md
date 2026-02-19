@@ -7,8 +7,8 @@ A stateful multi-agent system using LangGraph (Python) to collect and review lat
 Install the required dependencies:
 
 ```bash
-pip install -r requirements.txt
-playwright install
+uv sync
+uv run playwright install chromium
 ```
 
 ## Run

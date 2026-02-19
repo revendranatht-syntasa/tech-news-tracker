@@ -1,14 +1,5 @@
-"""
-News Pipeline - A modular RSS feed processing and semantic search system.
-"""
+from .tracker import NewsTracker
+from .config import TrackerConfig
+from .prompts import Prompts
 
-from .pipeline import NewsPipeline
-from .config import AppConfig, FeedConfig
-
-__version__ = "0.1.0"
-
-__all__ = [
-    "NewsPipeline",
-    "AppConfig",
-    "FeedConfig",
-]
+__all__ = ["NewsTracker", "TrackerConfig", "Prompts"]

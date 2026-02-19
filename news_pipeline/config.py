@@ -1,30 +1,20 @@
-"""Configuration classes for the news pipeline."""
-
 from dataclasses import dataclass, field
-from typing import Dict
+from typing import List
 
 
 @dataclass
-class FeedConfig:
-    """Configuration for RSS feeds."""
-
-    rss_feeds: Dict[str, str] = field(default_factory=lambda: {
-        "openai": "https://openai.com/blog/rss.xml",
-        # "langchain": "https://changelog.langchain.com/feed",
-        # "google_ai": "https://research.google/blog/rss/",
-        # "aws_ai": "https://aws.amazon.com/blogs/aws/category/artificial-intelligence/feed/",
-        # "apache": "https://news.apache.org/feed",
-        # "databricks_apache": "https://www.databricks.com/feed"
+class TrackerConfig:
+    sources: dict[str, list[str]] = field(default_factory=lambda: {
+        "OpenAI": [
+            "https://openai.com/news/rss.xml",
+        ],
     })
 
+    email_recipients: List[str] = field(default_factory=lambda: [
+        "mohnish.unity3d.dev@gmail.com",
+        "h33t92@gmail.com",
+    ])
 
-@dataclass
-class AppConfig:
-    """Main application configuration."""
-
-    feeds: FeedConfig = field(default_factory=FeedConfig)
-
-    @classmethod
-    def create_default(cls) -> "AppConfig":
-        """Create default configuration."""
-        return cls()
+    from_email: str = "mani.gamed3v@gmail.com"
+    cache_path: str = ".cached/cache.json"
+    fallback_lookback_days: int = 10
